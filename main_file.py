@@ -1,5 +1,6 @@
 import random
 import sys
+
 import pygame
 
 # Инициализация Pygame
@@ -60,6 +61,8 @@ tetrominoes = [
     [[1, 1, 1], [0, 0, 1]]
 ]
 tetromino_colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (0, 255, 255), (255, 0, 255), (255, 165, 0)]
+
+
 # Генерация новой фигуры
 def generate_tetromino():
     tetromino_index = random.randint(0, len(tetrominoes) - 1)
@@ -77,6 +80,8 @@ def check_collision(tetromino, tetromino_x, tetromino_y, tetris_grid):
                     tetris_grid[tetromino_y + y][tetromino_x + x]):
                 return True
     return False
+
+
 # Заполнение ячеек игрового поля
 def draw_grid(tetris_grid, tetromino, tetromino_x, tetromino_y, tetromino_color):
     for y in range(tetris_height):
@@ -104,6 +109,8 @@ def clear_lines(tetris_grid):
         del tetris_grid[line]
         tetris_grid.insert(0, [None] * tetris_width)
     return len(full_lines)
+
+
 # Запуск игры
 def run_game():
     tetromino, tetromino_color = generate_tetromino()
