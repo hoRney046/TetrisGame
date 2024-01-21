@@ -165,7 +165,7 @@ def run_game():
 
         pygame.display.update()
 
-        clock.tick(6)
+        clock.tick(3)
 
 
 def first_screen():
