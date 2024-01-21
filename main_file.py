@@ -60,4 +60,21 @@ tetrominoes = [
     [[1, 1, 1], [0, 0, 1]]
 ]
 tetromino_colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (0, 255, 255), (255, 0, 255), (255, 165, 0)]
+# Генерация новой фигуры
+def generate_tetromino():
+    tetromino_index = random.randint(0, len(tetrominoes) - 1)
+    tetromino = tetrominoes[tetromino_index]
+    tetromino_color = tetromino_colors[tetromino_index]
+    return tetromino, tetromino_color
+
+
+# Проверка возможности размещения фигуры на игровом поле
+def check_collision(tetromino, tetromino_x, tetromino_y, tetris_grid):
+    for y in range(len(tetromino)):
+        for x in range(len(tetromino[y])):
+            if tetromino[y][x] and (
+                    tetromino_x + x < 0 or tetromino_x + x >= tetris_width or tetromino_y + y >= tetris_height or
+                    tetris_grid[tetromino_y + y][tetromino_x + x]):
+                return True
+    return False
 
