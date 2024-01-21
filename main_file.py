@@ -77,4 +77,31 @@ def check_collision(tetromino, tetromino_x, tetromino_y, tetris_grid):
                     tetris_grid[tetromino_y + y][tetromino_x + x]):
                 return True
     return False
+# Заполнение ячеек игрового поля
+def draw_grid(tetris_grid, tetromino, tetromino_x, tetromino_y, tetromino_color):
+    for y in range(tetris_height):
+        for x in range(tetris_width):
+            pygame.draw.rect(screen, BLACK, (tetris_x + x * cell_size, tetris_y + y * cell_size,
+                                             cell_size, cell_size), 1)
+            if tetris_grid[y][x]:
+                pygame.draw.rect(screen, tetris_grid[y][x], (tetris_x + x * cell_size, tetris_y + y * cell_size,
+                                                             cell_size, cell_size))
+    for y in range(len(tetromino)):
+        for x in range(len(tetromino[y])):
+            if tetromino[y][x]:
+                pygame.draw.rect(screen, tetromino_color, (tetris_x + (tetromino_x + x) * cell_size,
+                                                           tetris_y + (tetromino_y + y) * cell_size,
+                                                           cell_size, cell_size))
+
+
+# Очистка заполненных линий и обновление счета
+def clear_lines(tetris_grid):
+    full_lines = []
+    for y in range(tetris_height):
+        if all(tetris_grid[y]):
+            full_lines.append(y)
+    for line in full_lines:
+        del tetris_grid[line]
+        tetris_grid.insert(0, [None] * tetris_width)
+    return len(full_lines)
 
